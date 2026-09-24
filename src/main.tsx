@@ -18,7 +18,7 @@ const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 function RouteLoading() {
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="animate-pulse text-muted-foreground">Loading...</div>
+      <div className="animate-pulse text-muted-foreground">Chargement…</div>
     </div>
   );
 }
@@ -126,7 +126,10 @@ createRoot(document.getElementById("root")!).render(
               <Route
                 path="/dashboard"
                 element={
-                  <RequireAuth>
+                  <RequireAuth
+                    title="Connectez-vous pour continuer"
+                    description="Votre parcours et ses étapes sont conservés dans votre espace personnel."
+                  >
                     <Dashboard />
                   </RequireAuth>
                 }

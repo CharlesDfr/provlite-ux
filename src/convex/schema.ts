@@ -34,6 +34,17 @@ const schema = defineSchema(
 
     // add other tables here
 
+    // Parcours d'orientation enregistré par un visiteur identifié.
+    // Le contenu des étapes vit dans le site : on ne stocke ici que le profil
+    // choisi et les étapes cochées, pour que la fiche reste à jour si
+    // l'établissement fait évoluer un parcours.
+    parcours: defineTable({
+      userId: v.id("users"),
+      profilId: v.string(),
+      completedSteps: v.array(v.string()),
+      updatedAt: v.number(),
+    }).index("by_user", ["userId"]),
+
     // tableName: defineTable({
     //   ...
     //   // table fields

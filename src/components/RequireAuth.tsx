@@ -23,8 +23,8 @@ import { Navigate, useLocation, useNavigate } from "react-router";
  */
 export function RequireAuth({
   children,
-  title = "Sign in to continue",
-  description = "This page is only available to signed-in users.",
+  title = "Connectez-vous pour continuer",
+  description = "Cette page n'est accessible qu'aux personnes identifiées.",
   redirectImmediately = false,
 }: {
   children: ReactNode;
@@ -43,6 +43,7 @@ export function RequireAuth({
     return (
       <main className="flex min-h-screen items-center justify-center bg-background">
         <Loader2 className="size-6 animate-spin text-muted-foreground" />
+        <span className="sr-only">Chargement</span>
       </main>
     );
   }
@@ -68,18 +69,21 @@ export function RequireAuth({
             <CardDescription>{description}</CardDescription>
           </CardHeader>
           <CardContent className="text-center text-sm text-muted-foreground">
-            You'll come straight back to this page once you're signed in.
+            Vous reviendrez directement sur cette page après identification.
           </CardContent>
           <CardFooter className="flex flex-col gap-2">
-            <Button className="w-full" onClick={() => navigate(signInHref)}>
-              Sign in
+            <Button
+              className="w-full rounded-full"
+              onClick={() => navigate(signInHref)}
+            >
+              Se connecter
             </Button>
             <Button
               variant="ghost"
-              className="w-full"
+              className="w-full rounded-full"
               onClick={() => navigate("/")}
             >
-              Back to home
+              Retour à l'accueil
             </Button>
           </CardFooter>
         </Card>

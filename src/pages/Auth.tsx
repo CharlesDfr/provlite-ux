@@ -66,7 +66,7 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
       setError(
         error instanceof Error
           ? error.message
-          : "Failed to send verification code. Please try again.",
+          : "L'envoi du code a échoué. Merci de réessayer.",
       );
       setIsLoading(false);
     }
@@ -86,7 +86,7 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
     } catch (error) {
       console.error("OTP verification error:", error);
 
-      setError("The verification code you entered is incorrect.");
+      setError("Le code saisi est incorrect.");
       setIsLoading(false);
 
       setOtp("");
@@ -104,7 +104,9 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
     } catch (error) {
       console.error("Guest login error:", error);
       console.error("Error details:", JSON.stringify(error, null, 2));
-      setError(`Failed to sign in as guest: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      setError(
+        `La connexion en tant qu'invité a échoué : ${error instanceof Error ? error.message : "erreur inconnue"}`,
+      );
       setIsLoading(false);
     }
   };
@@ -116,23 +118,26 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
       {/* Auth Content */}
       <div className="flex-1 flex items-center justify-center">
         <div className="flex items-center justify-center h-full flex-col">
-        <Card className="min-w-[350px] pb-0 border shadow-md">
+        <Card className="mx-4 w-full max-w-md gap-0 border border-border pt-6 pb-0 shadow-none">
           {step === "signIn" ? (
             <>
               <CardHeader className="text-center">
               <div className="flex justify-center">
                     <img
                       src={logo}
-                      alt="Lock Icon"
+                      alt="Provélite Académie"
                       width={64}
                       height={64}
                       className="rounded-lg mb-4 mt-4 cursor-pointer"
                       onClick={() => navigate("/")}
                     />
                   </div>
-                <CardTitle className="text-xl">Get Started</CardTitle>
+                <CardTitle className="display text-2xl font-normal">
+                  Mon parcours
+                </CardTitle>
                 <CardDescription>
-                  Enter your email to log in or sign up
+                  Recevez un code par e-mail pour retrouver votre parcours et
+                  ses étapes.
                 </CardDescription>
               </CardHeader>
               <form onSubmit={handleEmailSubmit}>
@@ -143,7 +148,7 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
                       <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         name="email"
-                        placeholder="name@example.com"
+                        placeholder="nom@exemple.fr"
                         type="email"
                         className="pl-9"
                         disabled={isLoading}
@@ -154,6 +159,7 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
                       type="submit"
                       variant="outline"
                       size="icon"
+                      className="rounded-full"
                       disabled={isLoading}
                     >
                       {isLoading ? (
@@ -174,7 +180,7 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
                       </div>
                       <div className="relative flex justify-center text-xs uppercase">
                         <span className="bg-background px-2 text-muted-foreground">
-                          Or
+                          ou
                         </span>
                       </div>
                     </div>
@@ -182,12 +188,12 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
                     <Button
                       type="button"
                       variant="outline"
-                      className="w-full mt-4"
+                      className="w-full mt-4 rounded-full"
                       onClick={handleGuestLogin}
                       disabled={isLoading}
                     >
                       <UserX className="mr-2 h-4 w-4" />
-                      Continue as Guest
+                      Continuer en tant qu'invité
                     </Button>
                   </div>
                 </CardContent>
@@ -196,9 +202,11 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
           ) : (
             <>
               <CardHeader className="text-center mt-4">
-                <CardTitle>Check your email</CardTitle>
+                <CardTitle className="display text-2xl font-normal">
+                  Vérifiez votre e-mail
+                </CardTitle>
                 <CardDescription>
-                  We've sent a code to {step.email}
+                  Un code de connexion a été envoyé à {step.email}
                 </CardDescription>
               </CardHeader>
               <form onSubmit={handleOtpSubmit}>
@@ -235,30 +243,30 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
                     </p>
                   )}
                   <p className="text-sm text-muted-foreground text-center mt-4">
-                    Didn't receive a code?{" "}
+                    Vous n'avez pas reçu de code ?{" "}
                     <Button
                       variant="link"
                       className="p-0 h-auto"
                       onClick={() => setStep("signIn")}
                     >
-                      Try again
+                      Renvoyer un code
                     </Button>
                   </p>
                 </CardContent>
                 <CardFooter className="flex-col gap-2">
                   <Button
                     type="submit"
-                    className="w-full"
+                    className="w-full rounded-full"
                     disabled={isLoading || otp.length !== 6}
                   >
                     {isLoading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Verifying...
+                        Vérification…
                       </>
                     ) : (
                       <>
-                        Verify code
+                        Valider le code
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </>
                     )}
@@ -268,9 +276,9 @@ function Auth({ redirectAfterAuth }: AuthProps = {}) {
                     variant="ghost"
                     onClick={() => setStep("signIn")}
                     disabled={isLoading}
-                    className="w-full"
+                    className="w-full rounded-full"
                   >
-                    Use different email
+                    Utiliser un autre e-mail
                   </Button>
                 </CardFooter>
               </form>
