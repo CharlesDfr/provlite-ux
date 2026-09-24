@@ -1,30 +1,40 @@
+import { useVisuels } from "@/hooks/use-visuels";
 import { cn } from "@/lib/utils";
+import { sourceVisuel, type PhotoOptions } from "@/lib/visuels";
 import { useState } from "react";
 
 /**
  * Visuel du site.
  *
- * Les photographies sont volontairement désaturées : elles s'accordent au bleu
- * nuit et au bronze sans jamais lutter avec la typographie. Tant que l'image
- * n'est pas arrivée — ou si elle est indisponible — un cadre de remplacement
- * garde la composition intacte, sans icône cassée ni saut de mise en page.
+ * Le composant reçoit une clé d'emplacement (« hero », « profil.vae »…) et
+ * résout lui-même l'adresse : le remplacement publié dans le CMS s'il existe,
+ * sinon le visuel par défaut recadré à la demande. Les photographies sont
+ * volontairement désaturées : elles s'accordent au bleu nuit et au bronze sans
+ * jamais lutter avec la typographie. Tant que l'image n'est pas arrivée — ou si
+ * elle est indisponible — un cadre de remplacement garde la composition
+ * intacte, sans icône cassée ni saut de mise en page.
  */
 export function Photo({
-  src,
+  visuel,
   alt,
   className,
   imgClassName,
   priority = false,
   zoom = false,
+  ...options
 }: {
-  src: string;
+  /** Emplacement photographique, partagé avec le CMS. */
+  visuel: string;
   alt: string;
   /** Classes du cadre : ratio, hauteur, arrondis. */
   className?: string;
   imgClassName?: string;
   priority?: boolean;
   zoom?: boolean;
-}) {
+} & PhotoOptions) {
+  const remplacements = useVisuels();
+  const src = sourceVisuel(visuel, options, remplacements);
+
   const [etat, setEtat] = useState<"chargement" | "pret" | "erreur">(
     "chargement",
   );

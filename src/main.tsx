@@ -12,6 +12,7 @@ import "./index.css";
 const Landing = lazy(() => import("./pages/Landing.tsx"));
 const AuthPage = lazy(() => import("./pages/Auth.tsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.tsx"));
+const Visuels = lazy(() => import("./pages/Visuels.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 // Simple loading fallback for route transitions
@@ -131,6 +132,17 @@ createRoot(document.getElementById("root")!).render(
                     description="Votre parcours et ses étapes sont conservés dans votre espace personnel."
                   >
                     <Dashboard />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/admin/visuels"
+                element={
+                  <RequireAuth
+                    title="Connectez-vous pour gérer les visuels"
+                    description="Le remplacement des photographies du site est réservé à l'équipe de l'établissement."
+                  >
+                    <Visuels />
                   </RequireAuth>
                 }
               />

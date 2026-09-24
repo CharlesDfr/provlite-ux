@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { AVIS } from "@/lib/provelite";
-import { VISUEL_TEMOIGNAGE, photo } from "@/lib/visuels";
 import { ArrowUpRight, Star } from "lucide-react";
 import { Photo } from "./Photo";
 import { Reveal, Section, SectionHead } from "./Section";
@@ -38,11 +37,10 @@ export function Avis() {
               </blockquote>
               <figcaption className="mt-7 flex items-start gap-4 border-t border-border pt-5">
                 <Photo
-                  src={photo(VISUEL_TEMOIGNAGE[index] ?? "lumiere", {
-                    w: 160,
-                    h: 160,
-                    crop: "faces",
-                  })}
+                  visuel={`avis.${index + 1}`}
+                  w={160}
+                  h={160}
+                  crop="faces"
                   alt={avis.auteur}
                   className="size-11 shrink-0 rounded-full"
                 />

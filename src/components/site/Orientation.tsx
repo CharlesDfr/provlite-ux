@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import { useAuth } from "@/hooks/use-auth";
 import { SALON, SITE, profilsActifs } from "@/lib/provelite";
-import { VISUEL_PROFIL, photo } from "@/lib/visuels";
 import { cn } from "@/lib/utils";
 import { useMutation, useQuery } from "convex/react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -140,10 +139,9 @@ export function Orientation({
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
             <Photo
-              src={photo(VISUEL_PROFIL[actif.id] ?? "salon", {
-                w: 1500,
-                h: 450,
-              })}
+              visuel={`profil.${actif.id}`}
+              w={1500}
+              h={450}
               alt={`Parcours : ${actif.label}`}
               className="aspect-[16/6] w-full border-b border-border lg:aspect-[21/6]"
             />

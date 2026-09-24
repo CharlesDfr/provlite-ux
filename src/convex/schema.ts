@@ -45,6 +45,20 @@ const schema = defineSchema(
       updatedAt: v.number(),
     }).index("by_user", ["userId"]),
 
+    // Photographies du site, remplaçables depuis le CMS.
+    // Chaque enregistrement remplace l'emplacement d'une clé (« hero »,
+    // « profil.vae »…). Une photographie importée est stockée dans le stockage
+    // de fichiers de Convex (`storageId`) ; une photographie externe est
+    // référencée par son adresse (`url`). Sans enregistrement, le visuel par
+    // défaut du site s'affiche : la table ne contient que les remplacements.
+    visuels: defineTable({
+      cle: v.string(),
+      storageId: v.optional(v.id("_storage")),
+      url: v.optional(v.string()),
+      updatedAt: v.number(),
+      updatedBy: v.optional(v.id("users")),
+    }).index("by_cle", ["cle"]),
+
     // tableName: defineTable({
     //   ...
     //   // table fields

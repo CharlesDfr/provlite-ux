@@ -1,5 +1,4 @@
 import { ARTICLES, PUBLICS, type Public } from "@/lib/provelite";
-import { VISUEL_ARTICLE, photo } from "@/lib/visuels";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
@@ -72,10 +71,9 @@ export function Conseils() {
               className="group flex h-full flex-col border border-border bg-background"
             >
               <Photo
-                src={photo(
-                  VISUEL_ARTICLE[index % VISUEL_ARTICLE.length] ?? "atelier",
-                  { w: 800, h: 450 },
-                )}
+                visuel={`article.${ARTICLES.indexOf(article) + 1}`}
+                w={800}
+                h={450}
                 alt={article.titre}
                 zoom
                 className="aspect-[16/9] w-full"

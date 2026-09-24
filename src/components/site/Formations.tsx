@@ -7,7 +7,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { FORMATIONS, type Formation } from "@/lib/provelite";
-import { VISUEL_FORMATION, photo } from "@/lib/visuels";
 import { cn } from "@/lib/utils";
 import { ArrowRight, X } from "lucide-react";
 import { useState } from "react";
@@ -83,10 +82,9 @@ export function Formations({
                 className="group flex h-full w-full flex-col border border-border bg-background text-left transition-colors hover:border-ink/25"
               >
                 <Photo
-                  src={photo(VISUEL_FORMATION[formation.id] ?? "atelier", {
-                    w: large ? 1500 : 800,
-                    h: large ? 450 : 500,
-                  })}
+                  visuel={`formation.${formation.id}`}
+                  w={large ? 1500 : 800}
+                  h={large ? 450 : 500}
                   alt={formation.name}
                   zoom
                   className={cn(
@@ -174,10 +172,9 @@ export function Formations({
                 <span className="sr-only">Fermer</span>
               </DialogClose>
               <Photo
-                src={photo(VISUEL_FORMATION[selection.id] ?? "atelier", {
-                  w: 1400,
-                  h: 500,
-                })}
+                visuel={`formation.${selection.id}`}
+                w={1400}
+                h={500}
                 alt={selection.name}
                 className="aspect-[16/6] w-full"
               />

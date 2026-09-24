@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { PROFILS, stepKey } from "@/lib/provelite";
 import { cn } from "@/lib/utils";
 import { useMutation, useQuery } from "convex/react";
-import { ArrowLeft, Check, Loader2, LogOut } from "lucide-react";
+import { ArrowLeft, Check, Images, Loader2, LogOut } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 
@@ -99,6 +99,18 @@ export default function Dashboard() {
             <span className="eyebrow-accent">Académie</span>
           </Link>
           <div className="flex items-center gap-2">
+            {user?.role === "admin" ? (
+              <Button
+                asChild
+                variant="outline"
+                className="h-9 rounded-full border-border px-4 text-[13px]"
+              >
+                <Link to="/admin/visuels">
+                  <Images className="size-3.5" />
+                  Gérer les visuels
+                </Link>
+              </Button>
+            ) : null}
             <Button
               asChild
               variant="ghost"

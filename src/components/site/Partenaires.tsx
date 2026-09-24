@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ENSEIGNES, MARQUES } from "@/lib/provelite";
-import { photo } from "@/lib/visuels";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Photo } from "./Photo";
 import { Reveal, Section, SectionHead } from "./Section";
@@ -59,7 +58,9 @@ export function Partenaires() {
       />
 
       <Photo
-        src={photo("equipe", { w: 1700, h: 480 })}
+        visuel="partenaires"
+        w={1700}
+        h={480}
         alt="Formateurs, apprenants et partenaires de Provélite Académie"
         className="mt-14 aspect-[16/6] w-full lg:aspect-[21/6]"
       />

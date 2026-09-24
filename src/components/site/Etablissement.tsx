@@ -1,5 +1,4 @@
 import { CHIFFRES, ETABLISSEMENT } from "@/lib/provelite";
-import { photo } from "@/lib/visuels";
 import { ArrowRight } from "lucide-react";
 import { Photo } from "./Photo";
 import { Reveal, Section } from "./Section";
@@ -11,13 +10,17 @@ export function Etablissement() {
         <div className="lg:col-span-6">
           <div className="grid grid-cols-2 gap-4 sm:gap-5">
             <Photo
-              src={photo("atelier", { w: 700, h: 880 })}
+              visuel="etablissement.1"
+              w={700}
+              h={880}
               alt="Un apprenant au fauteuil, encadré par un formateur"
               zoom
               className="aspect-[4/5] w-full"
             />
             <Photo
-              src={photo("soins", { w: 700, h: 880 })}
+              visuel="etablissement.2"
+              w={700}
+              h={880}
               alt="Travaux pratiques de couleur au CFA"
               zoom
               className="mt-10 aspect-[4/5] w-full sm:mt-14"

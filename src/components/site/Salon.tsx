@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { SALON, SITE } from "@/lib/provelite";
-import { VISUEL_SALON, photo } from "@/lib/visuels";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import { Photo } from "./Photo";
 import { Reveal, Section, SectionHead } from "./Section";
+
+/** Emplacements photographiques de la galerie du salon, gérés depuis le CMS. */
+const EMPLACEMENTS = ["salon.1", "salon.2", "salon.3"];
 
 const RENDEZ_VOUS = [
   { label: "Période", value: SALON.periode },
@@ -30,10 +32,12 @@ export function Salon({ onDevenirModele }: { onDevenirModele: () => void }) {
       />
 
       <div className="mt-14 grid gap-4 sm:gap-5 lg:grid-cols-3">
-        {VISUEL_SALON.map((visuel, index) => (
+        {EMPLACEMENTS.map((visuel, index) => (
           <Photo
-            key={`${visuel}-${index}`}
-            src={photo(visuel, { w: 800, h: 1000 })}
+            key={visuel}
+            visuel={visuel}
+            w={800}
+            h={1000}
             alt={`Salon d'application : ${SALON.prestations[index]?.label ?? "prestation"}`}
             zoom
             className={cn("aspect-[4/5] w-full", index === 1 && "lg:mt-10")}

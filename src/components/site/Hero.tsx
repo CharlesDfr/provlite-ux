@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/provelite";
-import { photo } from "@/lib/visuels";
 import { ArrowRight } from "lucide-react";
 import { Photo } from "./Photo";
 
@@ -20,7 +19,6 @@ const ACCES_DIRECTS = [
     titre: "Vous recrutez un apprenti ou un stagiaire ?",
     detail:
       "Rythme, aides et suivi de progression : un conseiller accompagne le salon de la première prise de contact jusqu'au livret d'apprentissage.",
-    visuel: "equipe" as const,
   },
   {
     eyebrow: "Salon d'application",
@@ -28,7 +26,6 @@ const ACCES_DIRECTS = [
     titre: "Vous souhaitez devenir modèle ?",
     detail:
       "Les prestations sont réalisées par les apprenants sous la supervision des formateurs, d'octobre à mai. La touche d'essai est obligatoire pour les prestations techniques.",
-    visuel: "soins" as const,
   },
 ];
 
@@ -83,7 +80,9 @@ export function Hero({ onProfil }: { onProfil: (id: string) => void }) {
 
         <div className="lg:col-span-6">
           <Photo
-            src={photo("salon", { w: 1100, h: 1320 })}
+            visuel="hero"
+            w={1100}
+            h={1320}
             alt="Le salon d'application de Provélite Académie"
             priority
             className="aspect-[5/6] w-full lg:aspect-[4/5]"
@@ -123,7 +122,9 @@ export function Hero({ onProfil }: { onProfil: (id: string) => void }) {
                 className="group flex h-full flex-col items-start bg-secondary text-left transition-colors hover:bg-background"
               >
                 <Photo
-                  src={photo(acces.visuel, { w: 900, h: 420 })}
+                  visuel={`acces.${acces.profil}`}
+                  w={900}
+                  h={420}
                   alt={acces.titre}
                   zoom
                   className="aspect-[16/7] w-full"

@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { MOMENTS, SESSIONS, SITE } from "@/lib/provelite";
-import { photo } from "@/lib/visuels";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import { Photo } from "./Photo";
@@ -22,7 +21,9 @@ export function Moments() {
       />
 
       <Photo
-        src={photo("lumiere", { w: 1700, h: 540 })}
+        visuel="moments"
+        w={1700}
+        h={540}
         alt="Les Moments Découverte à Provélite Académie"
         className="mt-14 aspect-[16/6] w-full lg:aspect-[21/6]"
       />
