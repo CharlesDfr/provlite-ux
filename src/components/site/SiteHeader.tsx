@@ -6,11 +6,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 const NAV = [
-  { label: "Orientation", href: "#orientation" },
+  { label: "Parcours", href: "#orientation" },
   { label: "Formations", href: "#formations" },
+  ...(SITE.momentsDecouverteActif
+    ? [{ label: "Moments Découverte", href: "#moments" }]
+    : []),
   { label: "Résultats", href: "#resultats" },
-  { label: "Salon d'application", href: "#salon" },
   { label: "Partenaires", href: "#partenaires" },
+  { label: "Le salon", href: "#salon" },
   { label: "Conseils", href: "#conseils" },
 ];
 
@@ -52,7 +55,7 @@ function CampaignBar() {
         <p className="text-[12.5px] leading-5 text-white/80">{bandeau.texte}</p>
         <div className="flex shrink-0 items-center gap-4">
           <a
-            href="#orientation"
+            href="#moments"
             className="hidden text-[12.5px] font-medium text-bronze underline decoration-bronze/40 underline-offset-4 transition-colors hover:decoration-bronze sm:inline"
           >
             {bandeau.bouton}
@@ -88,7 +91,7 @@ export function SiteHeader() {
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-8 px-6 sm:px-8">
           <Wordmark />
 
-          <nav className="hidden items-center gap-7 lg:flex">
+          <nav className="hidden items-center gap-6 xl:flex">
             {NAV.map((item) => (
               <a
                 key={item.href}
@@ -116,7 +119,7 @@ export function SiteHeader() {
               aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
               aria-expanded={open}
               onClick={() => setOpen((value) => !value)}
-              className="flex size-9 items-center justify-center rounded-full border border-border text-ink transition-colors hover:bg-secondary lg:hidden"
+              className="flex size-9 items-center justify-center rounded-full border border-border text-ink transition-colors hover:bg-secondary xl:hidden"
             >
               {open ? <X className="size-4" /> : <Menu className="size-4" />}
             </button>
@@ -127,7 +130,7 @@ export function SiteHeader() {
       {/* Menu mobile — plein écran, très sobre */}
       <div
         className={cn(
-          "fixed inset-0 z-50 flex flex-col bg-background transition-opacity duration-200 lg:hidden",
+          "fixed inset-0 z-50 flex flex-col bg-background transition-opacity duration-200 xl:hidden",
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0",

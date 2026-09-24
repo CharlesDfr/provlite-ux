@@ -7,15 +7,15 @@ export function Avis() {
   return (
     <Section id="avis" tone="muted">
       <SectionHead
-        eyebrow="Avis Google"
+        eyebrow="Avis et témoignages"
         title={
           <>
             {AVIS.note} sur 5,
             <br />
-            d'après {AVIS.total} avis.
+            d’après {AVIS.total} avis.
           </>
         }
-        lede="La note, le nombre d'avis et les extraits sont récupérés dynamiquement depuis Google dans la version finale. Les témoignages d'entreprises et de partenaires y sont associés."
+        lede="Apprenants, diplômés, entreprises et partenaires : les témoignages sont regroupés ici. La note et les extraits Google sont récupérés dynamiquement dans la version finale."
       />
 
       <div className="mt-16 grid gap-px border-y border-border bg-border lg:grid-cols-3">
@@ -40,6 +40,9 @@ export function Avis() {
                 </span>
                 <span className="mt-1 block text-[12px] text-muted-foreground">
                   {avis.contexte}
+                </span>
+                <span className="mt-0.5 block text-[12px] text-muted-foreground">
+                  {avis.formation} — {avis.promotion}
                 </span>
               </figcaption>
             </figure>

@@ -5,10 +5,14 @@ import { PhaseTag } from "./Section";
 
 const SUR_CETTE_PAGE = [
   { label: "Accueil", to: "#accueil" },
-  { label: "Orientation par public", to: "#orientation" },
+  { label: "L'établissement", to: "#etablissement" },
+  { label: "Parcours par profil", to: "#orientation" },
   { label: "Formations", to: "#formations" },
+  ...(SITE.momentsDecouverteActif
+    ? [{ label: "Moments Découverte", to: "#moments" }]
+    : []),
   { label: "Résultats et indicateurs", to: "#resultats" },
-  { label: "Avis Google", to: "#avis" },
+  { label: "Avis et témoignages", to: "#avis" },
   { label: "Salon d'application", to: "#salon" },
   { label: "Professionnels & partenaires", to: "#partenaires" },
   { label: "Conseils & actualités", to: "#conseils" },

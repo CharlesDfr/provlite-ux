@@ -36,8 +36,8 @@ export const SITE = {
   bandeauCampagne: {
     texte: "Les Moments Découverte sont ouverts — inscrivez-vous dès maintenant.",
     bouton: "Voir les dates",
-    debut: "2026-01-12",
-    fin: "2026-03-28",
+    debut: "2026-09-15",
+    fin: "2026-12-19",
     actif: true,
   },
 } as const;
@@ -395,21 +395,21 @@ export type Session = {
 
 export const SESSIONS: Session[] = [
   {
-    jour: "Samedi 14 février",
+    jour: "Samedi 10 octobre",
     horaire: "9 h 30 – 11 h",
     public: "CAP · BP — futurs apprenants et familles",
     places: "12 places restantes",
     statut: "Places disponibles",
   },
   {
-    jour: "Mercredi 4 mars",
+    jour: "Mercredi 4 novembre",
     horaire: "14 h – 15 h 30",
     public: "CS Coupe couleur femme et Coupe homme",
     places: "3 places restantes",
     statut: "Presque complet",
   },
   {
-    jour: "Samedi 21 mars",
+    jour: "Samedi 21 novembre",
     horaire: "9 h 30 – 11 h",
     public: "Reconversion et alternance adulte",
     places: "Session complète",
@@ -934,6 +934,40 @@ export const COHORTES: Cohorte[] = [
 ];
 
 /* ------------------------------------------------------------------ */
+/* Bandeau éditorial de l'établissement                               */
+/* ------------------------------------------------------------------ */
+
+export const ETABLISSEMENT = {
+  eyebrow: "Provélite Académie",
+  titre: "L'école de la coiffure, du geste juste au projet professionnel.",
+  paragraphes: [
+    "Provélite Académie forme depuis 2008 aux métiers de la coiffure, en alternance et en formation continue. Révéler, sublimer, structurer, recommencer : ce sont les gestes du métier, et c'est ce que nos apprenants apprennent à maîtriser.",
+    "Nos formateurs viennent du salon. Ils transmettent une pratique ancrée dans le réel, sans rien céder à l'exigence du référentiel et de l'examen. Nous sommes convaincus que la créativité naît de la méthode : chaque parcours combine donc la pratique au CFA, l'expérience en entreprise et la théorie accessible sur myProvélite.",
+  ],
+  cta: { label: "Le CFA, l'équipe et les engagements", to: "#salon" },
+};
+
+/* ------------------------------------------------------------------ */
+/* Moments Découverte — section conditionnelle                         */
+/* ------------------------------------------------------------------ */
+
+export const MOMENTS = {
+  eyebrow: "Moments Découverte",
+  titre: "Découvrez Provélite Académie avant de vous engager.",
+  lede: "Un Moment Découverte ne se limite pas à une visite : on rencontre l'équipe, on comprend l'alternance, on visite les locaux, on pose ses questions et, selon les sessions, on assiste à une démonstration. L'inscription se fait ensuite en quelques minutes.",
+  infos: [
+    { label: "Adresse", value: SITE.contact.adresse },
+    { label: "Durée estimée", value: "Environ 1 h 30" },
+    { label: "Accompagnant", value: "Un accompagnant est bienvenu" },
+    { label: "Accès", value: "Métro et bus à proximité, stationnement en voirie" },
+    {
+      label: "Contact",
+      value: `${SITE.contact.telephone} — ${SITE.contact.email}`,
+    },
+  ],
+};
+
+/* ------------------------------------------------------------------ */
 /* Avis Google                                                         */
 /* ------------------------------------------------------------------ */
 
@@ -945,18 +979,24 @@ export const AVIS = {
     {
       auteur: "Camille R.",
       contexte: "Ancienne apprenante, CAP puis BP",
+      formation: "BP Coiffure",
+      promotion: "Promotion 2021-2023",
       texte:
         "On apprend le métier pour de vrai. Les formateurs prennent le temps de reprendre les gestes, et le salon d'application change tout : on progresse beaucoup plus vite.",
     },
     {
       auteur: "Sofiane B.",
       contexte: "Apprenant en BP Coiffure",
+      formation: "BP Coiffure",
+      promotion: "Promotion 2024-2026",
       texte:
         "Une journée au CFA par semaine et tout le reste à suivre sur myProvélite. On peut travailler et se former sans être perdu.",
     },
     {
       auteur: "Enseigne partenaire",
       contexte: "Recrute des alternants depuis 2019",
+      formation: "Partenariat avec Provélite Académie",
+      promotion: "Salons partenaires",
       texte:
         "Les alternants arrivent préparés et le suivi est réel. Le formateur référent appelle le salon, on n'est jamais seuls face aux questions du livret.",
     },
@@ -1000,30 +1040,42 @@ export const SALON = {
 export const ENSEIGNES = [
   {
     nom: "Franck Provost",
-    description: "Enseigne partenaire pour l'accueil des alternants en CAP et en BP.",
+    description:
+      "Classe dédiée : les apprenants du CAP et du BP découvrent les méthodes de travail de l'enseigne et ses attendus en salon.",
+    site: "https://www.franckprovost.com",
   },
   {
     nom: "Saint Algue",
-    description: "Réseau partenaire du CFA pour les contrats d'apprentissage.",
+    description:
+      "Réseau partenaire du CFA pour les contrats d'apprentissage, avec des parcours d'intégration pensés pour les alternants.",
+    site: "https://www.saintalgue.com",
   },
   {
     nom: "Jean Louis David",
-    description: "Salons partenaires et interventions professionnelles auprès des apprenants.",
+    description:
+      "Salons partenaires et interventions professionnelles : coupe, couleur et relation client vus depuis le fauteuil.",
+    site: "https://www.jeanlouisdavid.com",
   },
 ];
 
 export const MARQUES = [
   {
     nom: "ghd",
-    description: "Collaboration technique sur les outils de coiffage et les démonstrations.",
+    description:
+      "Collaboration technique sur les outils de coiffage : réglages, températures et gestes professionnels démontrés en atelier.",
+    site: "https://www.ghd.com",
   },
   {
     nom: "Wella",
-    description: "Formation couleur et mise à disposition des supports techniques.",
+    description:
+      "Formation couleur et mise à disposition des supports techniques pour les travaux pratiques du certificat de spécialisation.",
+    site: "https://www.wella.com",
   },
   {
     nom: "L'Oréal Professionnel",
-    description: "Interventions pédagogiques et veille sur les techniques de coloration.",
+    description:
+      "Interventions pédagogiques et veille sur les techniques de coloration, avec des temps forts organisés pour les apprenants.",
+    site: "https://www.lorealprofessionnel.fr",
   },
 ];
 
@@ -1137,7 +1189,7 @@ export const ARBORESCENCE: { label: string; to?: string; phase?: string }[] = [
   { label: "Inscriptions", phase: "Phase 2" },
   {
     label: "Moments Découverte",
-    to: SITE.momentsDecouverteActif ? "#orientation" : undefined,
+    to: SITE.momentsDecouverteActif ? "#moments" : undefined,
     phase: SITE.momentsDecouverteActif ? undefined : "Désactivée",
   },
   { label: "Professionnels & partenaires", to: "#partenaires" },

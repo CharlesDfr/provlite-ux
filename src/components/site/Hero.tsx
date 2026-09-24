@@ -2,6 +2,24 @@ import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/provelite";
 import { ArrowRight } from "lucide-react";
 
+/** Les deux accès les plus demandés, en bandeau sous le hero. */
+const ACCES_DIRECTS = [
+  {
+    eyebrow: "Entreprises et salons",
+    profil: "entreprise",
+    titre: "Vous recrutez un apprenti ou un stagiaire ?",
+    detail:
+      "Rythme, aides et suivi de progression : un conseiller accompagne le salon de la première prise de contact jusqu'au livret d'apprentissage.",
+  },
+  {
+    eyebrow: "Salon d'application",
+    profil: "modele",
+    titre: "Vous souhaitez devenir modèle ?",
+    detail:
+      "Les prestations sont réalisées par les apprenants sous la supervision des formateurs, d'octobre à mai. La touche d'essai est obligatoire pour les prestations techniques.",
+  },
+];
+
 const FICHE = [
   { label: "Établissement", value: "CFA privé en alternance, depuis 2008" },
   { label: "Formations", value: "CAP · CS · BP · CQP" },
@@ -10,7 +28,7 @@ const FICHE = [
   { label: "Label", value: "1er CFA HappyAtSchool® en 2024 et 2025" },
 ];
 
-export function Hero({ onDecouverte }: { onDecouverte: () => void }) {
+export function Hero({ onProfil }: { onProfil: (id: string) => void }) {
   return (
     <section id="accueil">
       <div className="mx-auto grid w-full max-w-6xl gap-16 px-6 pt-14 pb-20 sm:px-8 lg:grid-cols-12 lg:gap-20 lg:pt-24 lg:pb-28">
@@ -50,7 +68,7 @@ export function Hero({ onDecouverte }: { onDecouverte: () => void }) {
             {SITE.momentsDecouverteActif ? (
               <button
                 type="button"
-                onClick={onDecouverte}
+                onClick={() => onProfil("decouverte")}
                 className="h-11 rounded-full border border-bronze/45 px-6 text-[14px] font-medium text-bronze transition-colors hover:bg-bronze-tint"
               >
                 Participer à un Moment Découverte
@@ -80,6 +98,32 @@ export function Hero({ onDecouverte }: { onDecouverte: () => void }) {
             périmètre et la source.
           </p>
         </aside>
+      </div>
+
+      <div className="border-t border-border bg-secondary">
+        <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
+          <div className="grid gap-px bg-border sm:grid-cols-2">
+            {ACCES_DIRECTS.map((acces) => (
+              <button
+                key={acces.profil}
+                type="button"
+                onClick={() => onProfil(acces.profil)}
+                className="group flex h-full flex-col items-start bg-secondary p-7 text-left transition-colors hover:bg-background sm:p-8"
+              >
+                <span className="flex w-full items-center justify-between gap-4">
+                  <span className="eyebrow">{acces.eyebrow}</span>
+                  <ArrowRight className="size-4 shrink-0 text-bronze transition-transform group-hover:translate-x-1" />
+                </span>
+                <span className="mt-4 block text-[16px] leading-snug text-ink">
+                  {acces.titre}
+                </span>
+                <span className="mt-2 block max-w-md text-[13px] leading-6 text-muted-foreground">
+                  {acces.detail}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

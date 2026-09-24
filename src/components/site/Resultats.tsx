@@ -4,11 +4,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { CHIFFRES, COHORTES } from "@/lib/provelite";
+import { COHORTES } from "@/lib/provelite";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { Reveal, Section, SectionHead } from "./Section";
+import { Section, SectionHead } from "./Section";
 
 const CODES: Record<string, string> = { cap: "CAP", bp: "BP", cs: "CS" };
 
@@ -28,39 +28,10 @@ export function Resultats() {
             disent vraiment.
           </>
         }
-        lede="Chaque donnée publiée précise l'année, la population concernée, le périmètre et la source. Les indicateurs sont historisés par promotion et réutilisés sur plusieurs pages du site."
+        lede="Taux de présentation, de réussite, de satisfaction et d'employabilité : chaque indicateur est publié par formation et par cohorte, avec son numérateur, son dénominateur et sa méthode de calcul."
       />
 
-      <div className="mt-16 border-t border-ink/15">
-        {CHIFFRES.map((chiffre, index) => (
-          <Reveal key={chiffre.label} delay={index * 0.04}>
-            <div className="grid gap-5 border-b border-border py-7 sm:grid-cols-12 sm:gap-8">
-              <div className="sm:col-span-3">
-                <span className="display tabular text-[2.5rem] leading-none text-ink">
-                  {chiffre.value}
-                </span>
-              </div>
-              <div className="sm:col-span-4">
-                <p className="text-[15px] leading-6 text-ink">{chiffre.label}</p>
-                <p className="mt-2 text-[12px] leading-5 text-muted-foreground">
-                  {chiffre.population}
-                </p>
-              </div>
-              <div className="sm:col-span-5">
-                <p className="text-[12px] leading-5 text-muted-foreground">
-                  <span className="text-ink">Année {chiffre.year}</span> ·{" "}
-                  {chiffre.scope}
-                </p>
-                <p className="mt-1 text-[12px] leading-5 text-muted-foreground">
-                  Source : {chiffre.source}
-                </p>
-              </div>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-
-      <div className="mt-20 grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <div className="mt-16 grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-5">
           <p className="eyebrow">Par formation</p>
           <h3 className="display mt-4 text-[1.9rem] leading-tight">
@@ -178,6 +149,12 @@ export function Resultats() {
           </AnimatePresence>
         </div>
       </div>
+
+      <p className="mt-16 border-t border-ink/15 pt-8 text-[12.5px] leading-6 text-muted-foreground">
+        Certification qualité délivrée au titre des actions de formation et des
+        actions de formation par apprentissage. Les taux nationaux sont
+        également disponibles par formation et par école, sur demande.
+      </p>
     </Section>
   );
 }
