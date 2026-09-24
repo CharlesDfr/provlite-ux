@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { AVIS } from "@/lib/provelite";
+import { VISUEL_TEMOIGNAGE, photo } from "@/lib/visuels";
 import { ArrowUpRight, Star } from "lucide-react";
+import { Photo } from "./Photo";
 import { Reveal, Section, SectionHead } from "./Section";
 
 export function Avis() {
@@ -34,16 +36,27 @@ export function Avis() {
               <blockquote className="mt-5 flex-1 text-[14px] leading-7 text-ink-soft">
                 « {avis.texte} »
               </blockquote>
-              <figcaption className="mt-7 border-t border-border pt-4">
-                <span className="block text-[13.5px] text-ink">
-                  {avis.auteur}
-                </span>
-                <span className="mt-1 block text-[12px] text-muted-foreground">
-                  {avis.contexte}
-                </span>
-                <span className="mt-0.5 block text-[12px] text-muted-foreground">
-                  {avis.formation} — {avis.promotion}
-                </span>
+              <figcaption className="mt-7 flex items-start gap-4 border-t border-border pt-5">
+                <Photo
+                  src={photo(VISUEL_TEMOIGNAGE[index] ?? "lumiere", {
+                    w: 160,
+                    h: 160,
+                    crop: "faces",
+                  })}
+                  alt={avis.auteur}
+                  className="size-11 shrink-0 rounded-full"
+                />
+                <div>
+                  <span className="block text-[13.5px] text-ink">
+                    {avis.auteur}
+                  </span>
+                  <span className="mt-1 block text-[12px] text-muted-foreground">
+                    {avis.contexte}
+                  </span>
+                  <span className="mt-0.5 block text-[12px] text-muted-foreground">
+                    {avis.formation} — {avis.promotion}
+                  </span>
+                </div>
               </figcaption>
             </figure>
           </Reveal>

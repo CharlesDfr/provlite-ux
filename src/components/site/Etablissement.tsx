@@ -1,16 +1,47 @@
 import { CHIFFRES, ETABLISSEMENT } from "@/lib/provelite";
+import { photo } from "@/lib/visuels";
 import { ArrowRight } from "lucide-react";
+import { Photo } from "./Photo";
 import { Reveal, Section } from "./Section";
 
 export function Etablissement() {
   return (
     <Section id="etablissement">
-      <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-5">
+      <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-6">
+          <div className="grid grid-cols-2 gap-4 sm:gap-5">
+            <Photo
+              src={photo("atelier", { w: 700, h: 880 })}
+              alt="Un apprenant au fauteuil, encadré par un formateur"
+              zoom
+              className="aspect-[4/5] w-full"
+            />
+            <Photo
+              src={photo("soins", { w: 700, h: 880 })}
+              alt="Travaux pratiques de couleur au CFA"
+              zoom
+              className="mt-10 aspect-[4/5] w-full sm:mt-14"
+            />
+          </div>
+        </div>
+
+        <div className="lg:col-span-6 lg:pt-2">
           <p className="eyebrow">{ETABLISSEMENT.eyebrow}</p>
-          <h2 className="display mt-5 text-[2.05rem] leading-[1.08] sm:text-[2.6rem] lg:text-[3.05rem]">
+          <h2 className="display mt-5 text-[2.05rem] leading-[1.08] sm:text-[2.6rem] lg:text-[2.9rem]">
             {ETABLISSEMENT.titre}
           </h2>
+          {ETABLISSEMENT.paragraphes.map((paragraphe, index) => (
+            <p
+              key={paragraphe.slice(0, 24)}
+              className={
+                index === 0
+                  ? "mt-7 text-[15px] leading-8 text-ink-soft"
+                  : "mt-5 text-[15px] leading-8 text-ink-soft"
+              }
+            >
+              {paragraphe}
+            </p>
+          ))}
           <a
             href={ETABLISSEMENT.cta.to}
             className="mt-8 inline-flex items-center gap-2 text-[13.5px] text-ink underline decoration-border underline-offset-4 transition-colors hover:decoration-bronze"
@@ -18,21 +49,6 @@ export function Etablissement() {
             {ETABLISSEMENT.cta.label}
             <ArrowRight className="size-4 text-bronze" />
           </a>
-        </div>
-
-        <div className="lg:col-span-7 lg:pt-2">
-          {ETABLISSEMENT.paragraphes.map((paragraphe, index) => (
-            <p
-              key={paragraphe.slice(0, 24)}
-              className={
-                index === 0
-                  ? "text-[15px] leading-8 text-ink-soft"
-                  : "mt-6 text-[15px] leading-8 text-ink-soft"
-              }
-            >
-              {paragraphe}
-            </p>
-          ))}
         </div>
       </div>
 

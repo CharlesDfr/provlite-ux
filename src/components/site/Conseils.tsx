@@ -1,7 +1,9 @@
 import { ARTICLES, PUBLICS, type Public } from "@/lib/provelite";
+import { VISUEL_ARTICLE, photo } from "@/lib/visuels";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
+import { Photo } from "./Photo";
 import { PhaseTag, Section, SectionHead } from "./Section";
 
 export function Conseils() {
@@ -59,7 +61,7 @@ export function Conseils() {
 
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout" initial={false}>
-          {articles.map((article) => (
+          {articles.map((article, index) => (
             <motion.article
               key={article.titre}
               layout
@@ -67,25 +69,36 @@ export function Conseils() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-              className="flex h-full flex-col border border-border bg-background p-7"
+              className="group flex h-full flex-col border border-border bg-background"
             >
-              <div className="flex items-center justify-between gap-4">
-                <span className="text-[11px] tracking-[0.14em] text-bronze uppercase">
-                  {article.categorie}
-                </span>
-                <span className="tabular text-[11px] text-muted-foreground">
-                  {article.lecture}
-                </span>
+              <Photo
+                src={photo(
+                  VISUEL_ARTICLE[index % VISUEL_ARTICLE.length] ?? "atelier",
+                  { w: 800, h: 450 },
+                )}
+                alt={article.titre}
+                zoom
+                className="aspect-[16/9] w-full"
+              />
+              <div className="flex flex-1 flex-col p-7">
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-[11px] tracking-[0.14em] text-bronze uppercase">
+                    {article.categorie}
+                  </span>
+                  <span className="tabular text-[11px] text-muted-foreground">
+                    {article.lecture}
+                  </span>
+                </div>
+                <h3 className="mt-5 text-[16px] leading-snug font-medium text-ink">
+                  {article.titre}
+                </h3>
+                <p className="mt-3 flex-1 text-[13px] leading-6 text-ink-soft">
+                  {article.resume}
+                </p>
+                <p className="mt-7 border-t border-border pt-4 text-[12px] text-muted-foreground">
+                  {article.date}
+                </p>
               </div>
-              <h3 className="mt-5 text-[16px] leading-snug font-medium text-ink">
-                {article.titre}
-              </h3>
-              <p className="mt-3 flex-1 text-[13px] leading-6 text-ink-soft">
-                {article.resume}
-              </p>
-              <p className="mt-7 border-t border-border pt-4 text-[12px] text-muted-foreground">
-                {article.date}
-              </p>
             </motion.article>
           ))}
         </AnimatePresence>

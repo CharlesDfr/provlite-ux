@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { MOMENTS, SESSIONS, SITE } from "@/lib/provelite";
+import { photo } from "@/lib/visuels";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
+import { Photo } from "./Photo";
 import { Reveal, Section, SectionHead } from "./Section";
 
 /**
@@ -19,7 +21,13 @@ export function Moments() {
         lede={MOMENTS.lede}
       />
 
-      <div className="mt-16 grid gap-14 lg:grid-cols-12 lg:gap-16">
+      <Photo
+        src={photo("lumiere", { w: 1700, h: 540 })}
+        alt="Les Moments Découverte à Provélite Académie"
+        className="mt-14 aspect-[16/6] w-full lg:aspect-[21/6]"
+      />
+
+      <div className="mt-12 grid gap-14 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-7">
           <div className="flex flex-wrap items-baseline justify-between gap-4">
             <p className="eyebrow">Dates disponibles</p>

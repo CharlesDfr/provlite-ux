@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ENSEIGNES, MARQUES } from "@/lib/provelite";
+import { photo } from "@/lib/visuels";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { Photo } from "./Photo";
 import { Reveal, Section, SectionHead } from "./Section";
 
 type Partenaire = { nom: string; description: string; site: string };
@@ -56,7 +58,13 @@ export function Partenaires() {
         lede="Le lien avec le monde professionnel n'est pas décoratif : les enseignes accueillent les alternants, les marques interviennent sur les techniques, et le réseau fait circuler les offres comme les savoir-faire."
       />
 
-      <div className="mt-16 space-y-14">
+      <Photo
+        src={photo("equipe", { w: 1700, h: 480 })}
+        alt="Formateurs, apprenants et partenaires de Provélite Académie"
+        className="mt-14 aspect-[16/6] w-full lg:aspect-[21/6]"
+      />
+
+      <div className="mt-12 space-y-14">
         <Groupe
           titre="Enseignes partenaires"
           note="Accueil des alternants et interventions pédagogiques"

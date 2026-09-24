@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { SALON, SITE } from "@/lib/provelite";
+import { VISUEL_SALON, photo } from "@/lib/visuels";
+import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
+import { Photo } from "./Photo";
 import { Reveal, Section, SectionHead } from "./Section";
 
 const RENDEZ_VOUS = [
@@ -25,6 +28,18 @@ export function Salon({ onDevenirModele }: { onDevenirModele: () => void }) {
         }
         lede={SALON.accroche}
       />
+
+      <div className="mt-14 grid gap-4 sm:gap-5 lg:grid-cols-3">
+        {VISUEL_SALON.map((visuel, index) => (
+          <Photo
+            key={`${visuel}-${index}`}
+            src={photo(visuel, { w: 800, h: 1000 })}
+            alt={`Salon d'application : ${SALON.prestations[index]?.label ?? "prestation"}`}
+            zoom
+            className={cn("aspect-[4/5] w-full", index === 1 && "lg:mt-10")}
+          />
+        ))}
+      </div>
 
       <div className="mt-16 grid gap-14 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-7">

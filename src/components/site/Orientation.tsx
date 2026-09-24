@@ -2,12 +2,14 @@ import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import { useAuth } from "@/hooks/use-auth";
 import { SALON, SITE, profilsActifs } from "@/lib/provelite";
+import { VISUEL_PROFIL, photo } from "@/lib/visuels";
 import { cn } from "@/lib/utils";
 import { useMutation, useQuery } from "convex/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { Photo } from "./Photo";
 import { PhaseTag, Section, SectionHead } from "./Section";
 
 export function Orientation({
@@ -137,6 +139,14 @@ export function Orientation({
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
+            <Photo
+              src={photo(VISUEL_PROFIL[actif.id] ?? "salon", {
+                w: 1500,
+                h: 450,
+              })}
+              alt={`Parcours : ${actif.label}`}
+              className="aspect-[16/6] w-full border-b border-border lg:aspect-[21/6]"
+            />
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border px-7 py-5 sm:px-9">
               <p className="eyebrow">
                 Parcours {actif.index} / {String(profils.length).padStart(2, "0")}
