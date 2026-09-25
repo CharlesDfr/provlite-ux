@@ -69,7 +69,7 @@ export function Photo({
           onError={() => setEtat("erreur")}
           className={cn(
             "absolute inset-0 size-full object-cover grayscale transition-all duration-700",
-            etat === "pret" ? "opacity-100" : "opacity-0",
+            etat === "pret" ? "scale-100 opacity-100" : "scale-[1.03] opacity-0",
             zoom &&
               "group-hover:scale-[1.03] group-hover:grayscale-0 group-hover:opacity-95",
             imgClassName,

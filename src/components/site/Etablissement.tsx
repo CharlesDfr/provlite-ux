@@ -1,6 +1,7 @@
 import { useTexte } from "@/hooks/use-contenus";
 import { CHIFFRES, ETABLISSEMENT } from "@/lib/provelite";
 import { ArrowRight } from "lucide-react";
+import { AnimatedNumber, LineDraw, MaskReveal } from "./motion";
 import { Photo } from "./Photo";
 import { Reveal, Section } from "./Section";
 
@@ -36,7 +37,9 @@ export function Etablissement() {
             {texte("etablissement.eyebrow", ETABLISSEMENT.eyebrow)}
           </p>
           <h2 className="display mt-5 text-[2.05rem] leading-[1.08] sm:text-[2.6rem] lg:text-[2.9rem]">
-            {texte("etablissement.titre", ETABLISSEMENT.titre)}
+            <MaskReveal>
+              {texte("etablissement.titre", ETABLISSEMENT.titre)}
+            </MaskReveal>
           </h2>
           {ETABLISSEMENT.paragraphes.map((paragraphe, index) => (
             <p
@@ -60,13 +63,14 @@ export function Etablissement() {
         </div>
       </div>
 
-      <div className="mt-20 border-t border-ink/15 pt-12">
-        <p className="eyebrow">Chiffres clés généraux</p>
+      <div className="mt-20 pt-12">
+        <LineDraw className="h-px w-full bg-ink/15" />
+        <p className="eyebrow mt-12">Chiffres clés généraux</p>
         <div className="mt-10 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-5">
           {CHIFFRES.map((chiffre, index) => (
             <Reveal key={chiffre.label} delay={index * 0.05}>
               <p className="display tabular text-[2.6rem] leading-none text-ink">
-                {chiffre.value}
+                <AnimatedNumber value={chiffre.value} />
               </p>
               <p className="mt-4 text-[13.5px] leading-6 text-ink">
                 {chiffre.label}

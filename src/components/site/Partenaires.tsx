@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ENSEIGNES, MARQUES } from "@/lib/provelite";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { Photo } from "./Photo";
+import { LineDraw, MaskReveal, ParallaxPhoto } from "./motion";
 import { Reveal, Section, SectionHead } from "./Section";
 
 type Partenaire = { nom: string; description: string; site: string };
@@ -53,14 +53,16 @@ export function Partenaires() {
     <Section id="partenaires">
       <SectionHead
         eyebrow="Professionnels & partenaires"
-        title={<>Rejoignez nos partenaires prestigieux.</>}
+        title={
+          <MaskReveal>Rejoignez nos partenaires prestigieux.</MaskReveal>
+        }
         lede="Le lien avec le monde professionnel n'est pas décoratif : les enseignes accueillent les alternants, les marques interviennent sur les techniques, et le réseau fait circuler les offres comme les savoir-faire."
       />
 
-      <Photo
+      <ParallaxPhoto
         visuel="partenaires"
         w={1700}
-        h={480}
+        h={560}
         alt="Formateurs, apprenants et partenaires de Provélite Académie"
         className="mt-14 aspect-[16/6] w-full lg:aspect-[21/6]"
       />
@@ -78,7 +80,8 @@ export function Partenaires() {
         />
       </div>
 
-      <div className="mt-16 flex flex-col gap-6 border-t border-ink/15 pt-8 lg:flex-row lg:items-center lg:justify-between">
+      <LineDraw className="mt-16 h-px w-full bg-ink/15" />
+      <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <p className="display text-[1.6rem] leading-tight">
             Vous souhaitez nouer un partenariat ?

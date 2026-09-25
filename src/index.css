@@ -157,6 +157,19 @@
   }
 }
 
+/* Animation du bandeau défilant — une seule définition, réutilisée partout. */
+@theme {
+  --animate-marquee: marquee 42s linear infinite;
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
 @layer utilities {
   /* Small uppercase editorial label used above every section title */
   .eyebrow {
@@ -209,4 +222,12 @@
   html {
     scroll-behavior: auto;
   }
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+/* Le bandeau défilant se met en pause au survol. */
+.marquee-hover:hover .animate-marquee {
+  animation-play-state: paused;
 }

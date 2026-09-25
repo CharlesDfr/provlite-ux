@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/provelite";
 import { ArrowRight } from "lucide-react";
+import { LineDraw, MaskReveal, ScrollProgress } from "./motion";
 import { Photo } from "./Photo";
+import { Reveal } from "./Section";
 
 const FICHE = [
   { label: "Établissement", value: "CFA privé en alternance" },
@@ -32,24 +34,29 @@ const ACCES_DIRECTS = [
 export function Hero({ onProfil }: { onProfil: (id: string) => void }) {
   return (
     <section id="accueil">
+      <ScrollProgress />
       <div className="mx-auto grid w-full max-w-6xl gap-12 px-6 pt-14 pb-16 sm:px-8 lg:grid-cols-12 lg:items-center lg:gap-16 lg:pt-20 lg:pb-20">
         <div className="lg:col-span-6">
           <p className="eyebrow">CFA de la coiffure — depuis 2008</p>
 
           <h1 className="display mt-6 text-[2.7rem] sm:text-6xl lg:text-[3.9rem]">
-            Apprendre le métier.
-            <br />
-            <span className="display-italic">Révéler votre talent.</span>
+            <MaskReveal delay={0.05}>Apprendre le métier.</MaskReveal>
+            <MaskReveal delay={0.18}>
+              <span className="display-italic">Révéler votre talent.</span>
+            </MaskReveal>
           </h1>
 
-          <p className="mt-7 max-w-lg text-[16px] leading-8 text-ink-soft">
-            Provélite Académie forme aux métiers de la coiffure, du CAP au CQP,
-            en alternance comme en formation continue. Un établissement où la
-            pratique en salon, l'exigence pédagogique et l'accompagnement
-            individuel avancent ensemble.
-          </p>
+          <Reveal delay={0.35}>
+            <p className="mt-7 max-w-lg text-[16px] leading-8 text-ink-soft">
+              Provélite Académie forme aux métiers de la coiffure, du CAP au
+              CQP, en alternance comme en formation continue. Un établissement
+              où la pratique en salon, l'exigence pédagogique et
+              l'accompagnement individuel avancent ensemble.
+            </p>
+          </Reveal>
 
-          <div className="mt-9 flex flex-wrap items-center gap-3">
+          <Reveal delay={0.45}>
+            <div className="mt-9 flex flex-wrap items-center gap-3">
             <Button
               asChild
               className="h-11 rounded-full px-6 text-[14px] font-medium"
@@ -73,12 +80,12 @@ export function Hero({ onProfil }: { onProfil: (id: string) => void }) {
                 className="h-11 rounded-full border border-bronze/45 px-6 text-[14px] font-medium text-bronze transition-colors hover:bg-bronze-tint"
               >
                 Participer à un Moment Découverte
-              </button>
-            ) : null}
-          </div>
+              </button>              ) : null}
+            </div>
+          </Reveal>
         </div>
 
-        <div className="lg:col-span-6">
+        <Reveal className="lg:col-span-6" delay={0.2}>
           <Photo
             visuel="hero"
             w={1100}
@@ -95,18 +102,21 @@ export function Hero({ onProfil }: { onProfil: (id: string) => void }) {
               Prestations d'octobre à mai
             </p>
           </div>
-        </div>
+        </Reveal>
       </div>
 
       <div className="border-t border-border">
+        <LineDraw className="h-px w-full bg-ink/25" duration={1.4} />
         <div className="mx-auto grid w-full max-w-6xl gap-x-10 gap-y-6 px-6 py-8 sm:grid-cols-2 sm:px-8 lg:grid-cols-5">
-          {FICHE.map((ligne) => (
-            <div key={ligne.label}>
-              <p className="eyebrow">{ligne.label}</p>
-              <p className="mt-2.5 text-[13.5px] leading-6 text-ink">
-                {ligne.value}
-              </p>
-            </div>
+          {FICHE.map((ligne, index) => (
+            <Reveal key={ligne.label} delay={0.1 + index * 0.06}>
+              <div>
+                <p className="eyebrow">{ligne.label}</p>
+                <p className="mt-2.5 text-[13.5px] leading-6 text-ink">
+                  {ligne.value}
+                </p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>

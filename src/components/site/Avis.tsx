@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useTexte } from "@/hooks/use-contenus";
 import { AVIS } from "@/lib/provelite";
 import { ArrowUpRight, Star } from "lucide-react";
+import { AnimatedNumber, MaskReveal } from "./motion";
 import { Photo } from "./Photo";
 import { Reveal, Section, SectionHead } from "./Section";
 
@@ -13,11 +14,11 @@ export function Avis() {
       <SectionHead
         eyebrow="Avis et témoignages"
         title={
-          <>
+          <MaskReveal>
             {texte("avis.note", AVIS.note)} sur 5,
             <br />
-            d’après {texte("avis.total", String(AVIS.total))} avis.
-          </>
+            d’après <AnimatedNumber value={texte("avis.total", String(AVIS.total))} /> avis.
+          </MaskReveal>
         }
         lede="Apprenants, diplômés, entreprises et partenaires : les témoignages sont regroupés ici. La note et les extraits Google sont récupérés dynamiquement dans la version finale."
       />

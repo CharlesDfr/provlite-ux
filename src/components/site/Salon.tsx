@@ -1,13 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { useTexte } from "@/hooks/use-contenus";
-import { SALON, SITE } from "@/lib/provelite";
+import { SALON, SITE, ENSEIGNES, MARQUES } from "@/lib/provelite";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
+import { Marquee, MaskReveal } from "./motion";
 import { Photo } from "./Photo";
 import { Reveal, Section, SectionHead } from "./Section";
 
 /** Emplacements photographiques de la galerie du salon, gérés depuis le CMS. */
 const EMPLACEMENTS = ["salon.1", "salon.2", "salon.3"];
+
+/** Bandeau défilant : les enseignes et marques qui accompagnent l'école. */
+const MARQUE = [...ENSEIGNES, ...MARQUES].map((partenaire) => partenaire.nom);
 
 export function Salon({ onDevenirModele }: { onDevenirModele: () => void }) {
   const texte = useTexte();
@@ -34,11 +38,11 @@ export function Salon({ onDevenirModele }: { onDevenirModele: () => void }) {
       <SectionHead
         eyebrow={texte("salon.titre", SALON.titre)}
         title={
-          <>
+          <MaskReveal>
             Un salon
             <br />
             qui forme.
-          </>
+          </MaskReveal>
         }
         lede={texte("salon.accroche", SALON.accroche)}
       />
@@ -56,6 +60,8 @@ export function Salon({ onDevenirModele }: { onDevenirModele: () => void }) {
           />
         ))}
       </div>
+
+      <Marquee items={MARQUE} className="mt-14 border-y border-border py-5" />
 
       <div className="mt-16 grid gap-14 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-7">

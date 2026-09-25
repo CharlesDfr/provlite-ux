@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { LineDraw, MaskReveal } from "./motion";
 import { Photo } from "./Photo";
 import { PhaseTag, Section, SectionHead } from "./Section";
 
@@ -74,15 +75,16 @@ export function Orientation({
       <SectionHead
         eyebrow="Orientation"
         title={
-          <>
+          <MaskReveal>
             Nous sommes à vos côtés pour faire avancer votre projet, quel que
             soit votre profil.
-          </>
+          </MaskReveal>
         }
         lede="Choisissez votre situation : les étapes, les conditions, les interlocuteurs et les ressources s'affichent ici, sans avoir à parcourir tout le site."
       />
 
-      <div className="mt-16 grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+      <LineDraw className="mt-16 h-px w-full bg-ink/15" />
+      <div className="mt-3 grid gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
         {profils.map((profil) => {
           const isActive = profil.id === actif.id;
           return (

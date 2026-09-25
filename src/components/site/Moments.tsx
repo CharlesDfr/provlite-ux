@@ -3,7 +3,7 @@ import { useTexte } from "@/hooks/use-contenus";
 import { MOMENTS, SESSIONS, SITE } from "@/lib/provelite";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
-import { Photo } from "./Photo";
+import { MaskReveal, ParallaxPhoto } from "./motion";
 import { Reveal, Section, SectionHead } from "./Section";
 
 /**
@@ -32,14 +32,16 @@ export function Moments() {
     <Section id="moments" tone="muted">
       <SectionHead
         eyebrow={texte("moments.eyebrow", MOMENTS.eyebrow)}
-        title={texte("moments.titre", MOMENTS.titre)}
+        title={
+          <MaskReveal>{texte("moments.titre", MOMENTS.titre)}</MaskReveal>
+        }
         lede={texte("moments.lede", MOMENTS.lede)}
       />
 
-      <Photo
+      <ParallaxPhoto
         visuel="moments"
         w={1700}
-        h={540}
+        h={640}
         alt="Les Moments Découverte à Provélite Académie"
         className="mt-14 aspect-[16/6] w-full lg:aspect-[21/6]"
       />

@@ -8,6 +8,7 @@ import { COHORTES } from "@/lib/provelite";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import { AnimatedNumber, MaskReveal } from "./motion";
 import { Section, SectionHead } from "./Section";
 
 const CODES: Record<string, string> = { cap: "CAP", bp: "BP", cs: "CS" };
@@ -22,11 +23,11 @@ export function Resultats() {
       <SectionHead
         eyebrow="Résultats et indicateurs"
         title={
-          <>
+          <MaskReveal>
             Ce que les chiffres
             <br />
             disent vraiment.
-          </>
+          </MaskReveal>
         }
         lede="Taux de présentation, de réussite, de satisfaction et d'employabilité : chaque indicateur est publié par formation et par cohorte, avec son numérateur, son dénominateur et sa méthode de calcul."
       />
@@ -89,7 +90,7 @@ export function Resultats() {
                   <div key={indicateur.label} className="bg-background p-6">
                     <p className="eyebrow">{indicateur.label}</p>
                     <p className="display tabular mt-4 text-[2.6rem] leading-none text-ink">
-                      {indicateur.value}
+                      <AnimatedNumber value={indicateur.value} duree={1.2} />
                     </p>
                     {indicateur.ratio ? (
                       <p className="mt-4 text-[12px] leading-5 text-muted-foreground">

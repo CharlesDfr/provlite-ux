@@ -10,6 +10,7 @@ import { FORMATIONS, type Formation } from "@/lib/provelite";
 import { cn } from "@/lib/utils";
 import { ArrowRight, X } from "lucide-react";
 import { useState } from "react";
+import { LineDraw, MaskReveal } from "./motion";
 import { Photo } from "./Photo";
 import { Reveal, Section, SectionHead } from "./Section";
 
@@ -58,11 +59,11 @@ export function Formations({
       <SectionHead
         eyebrow="Formations"
         title={
-          <>
+          <MaskReveal>
             Cinq voies,
             <br />
             une même exigence.
-          </>
+          </MaskReveal>
         }
         lede="Cette page oriente plus qu'elle ne détaille. Pour chaque voie : le niveau, la durée, le rythme, les modalités et les financements possibles — puis la fiche complète."
       />
@@ -79,8 +80,12 @@ export function Formations({
               <button
                 type="button"
                 onClick={() => setSelection(formation)}
-                className="group flex h-full w-full flex-col border border-border bg-background text-left transition-colors hover:border-ink/25"
+                className="group relative flex h-full w-full flex-col border border-border bg-background text-left transition-colors hover:border-ink/25"
               >
+                <LineDraw
+                  className="absolute inset-x-0 top-0 h-px bg-bronze"
+                  duration={0.7}
+                />
                 <Photo
                   visuel={`formation.${formation.id}`}
                   w={large ? 1500 : 800}
