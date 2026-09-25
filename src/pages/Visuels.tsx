@@ -13,6 +13,7 @@ import {
   Loader2,
   LogOut,
   RotateCcw,
+  Type,
   Upload,
 } from "lucide-react";
 import { useState } from "react";
@@ -223,6 +224,16 @@ export default function Visuels() {
               <Link to="/dashboard">
                 <ArrowLeft className="size-3.5" />
                 Mon parcours
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              className="h-9 rounded-full border-border px-4 text-[13px]"
+            >
+              <Link to="/admin/contenus">
+                <Type className="size-3.5" />
+                Gérer les textes
               </Link>
             </Button>
             <Button

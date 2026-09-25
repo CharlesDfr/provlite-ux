@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import { useAuth } from "@/hooks/use-auth";
+import { useTexte } from "@/hooks/use-contenus";
 import { SALON, SITE, profilsActifs } from "@/lib/provelite";
 import { cn } from "@/lib/utils";
 import { useMutation, useQuery } from "convex/react";
@@ -28,6 +29,7 @@ export function Orientation({
 
   const [enregistrement, setEnregistrement] = useState(false);
   const [erreur, setErreur] = useState<string | null>(null);
+  const texte = useTexte();
   const dejaEnregistre = monParcours?.profilId === actif.id;
 
   /** Sur mobile, la grille de profils est longue : on ramène le panneau. */
@@ -204,7 +206,7 @@ export function Orientation({
                   <div className="mt-8 border-l-2 border-bronze bg-bronze-tint/70 px-6 py-5">
                     <p className="eyebrow-accent">Avant le rendez-vous</p>
                     <p className="mt-2 text-[13.5px] leading-6 text-ink-soft">
-                      {SALON.toucheEssai}
+                      {texte("salon.toucheEssai", SALON.toucheEssai)}
                     </p>
                   </div>
                 ) : null}

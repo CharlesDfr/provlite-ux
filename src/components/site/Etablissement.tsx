@@ -1,9 +1,12 @@
+import { useTexte } from "@/hooks/use-contenus";
 import { CHIFFRES, ETABLISSEMENT } from "@/lib/provelite";
 import { ArrowRight } from "lucide-react";
 import { Photo } from "./Photo";
 import { Reveal, Section } from "./Section";
 
 export function Etablissement() {
+  const texte = useTexte();
+
   return (
     <Section id="etablissement">
       <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
@@ -29,27 +32,29 @@ export function Etablissement() {
         </div>
 
         <div className="lg:col-span-6 lg:pt-2">
-          <p className="eyebrow">{ETABLISSEMENT.eyebrow}</p>
+          <p className="eyebrow">
+            {texte("etablissement.eyebrow", ETABLISSEMENT.eyebrow)}
+          </p>
           <h2 className="display mt-5 text-[2.05rem] leading-[1.08] sm:text-[2.6rem] lg:text-[2.9rem]">
-            {ETABLISSEMENT.titre}
+            {texte("etablissement.titre", ETABLISSEMENT.titre)}
           </h2>
           {ETABLISSEMENT.paragraphes.map((paragraphe, index) => (
             <p
-              key={paragraphe.slice(0, 24)}
+              key={index}
               className={
                 index === 0
                   ? "mt-7 text-[15px] leading-8 text-ink-soft"
                   : "mt-5 text-[15px] leading-8 text-ink-soft"
               }
             >
-              {paragraphe}
+              {texte(`etablissement.paragraphe.${index + 1}`, paragraphe)}
             </p>
           ))}
           <a
             href={ETABLISSEMENT.cta.to}
             className="mt-8 inline-flex items-center gap-2 text-[13.5px] text-ink underline decoration-border underline-offset-4 transition-colors hover:decoration-bronze"
           >
-            {ETABLISSEMENT.cta.label}
+            {texte("etablissement.cta", ETABLISSEMENT.cta.label)}
             <ArrowRight className="size-4 text-bronze" />
           </a>
         </div>

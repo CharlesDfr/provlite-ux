@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useTexte } from "@/hooks/use-contenus";
 import { SALON, SITE } from "@/lib/provelite";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
@@ -8,19 +9,30 @@ import { Reveal, Section, SectionHead } from "./Section";
 /** Emplacements photographiques de la galerie du salon, gérés depuis le CMS. */
 const EMPLACEMENTS = ["salon.1", "salon.2", "salon.3"];
 
-const RENDEZ_VOUS = [
-  { label: "Période", value: SALON.periode },
-  { label: "Prise de rendez-vous", value: "Par téléphone uniquement" },
-  { label: "Téléphone", value: SITE.salon.telephone },
-  { label: "Horaires d'appel", value: SITE.salon.horairesAppel },
-  { label: "Adresse", value: SITE.salon.adresse },
-];
-
 export function Salon({ onDevenirModele }: { onDevenirModele: () => void }) {
+  const texte = useTexte();
+
+  const rendezVous = [
+    { label: "Période", value: texte("salon.periode", SALON.periode) },
+    { label: "Prise de rendez-vous", value: "Par téléphone uniquement" },
+    {
+      label: "Téléphone",
+      value: texte("salon.coordonnees.telephone", SITE.salon.telephone),
+    },
+    {
+      label: "Horaires d'appel",
+      value: texte("salon.coordonnees.horairesAppel", SITE.salon.horairesAppel),
+    },
+    {
+      label: "Adresse",
+      value: texte("salon.coordonnees.adresse", SITE.salon.adresse),
+    },
+  ];
+
   return (
     <Section id="salon">
       <SectionHead
-        eyebrow="Le salon d'application"
+        eyebrow={texte("salon.titre", SALON.titre)}
         title={
           <>
             Un salon
@@ -28,7 +40,7 @@ export function Salon({ onDevenirModele }: { onDevenirModele: () => void }) {
             qui forme.
           </>
         }
-        lede={SALON.accroche}
+        lede={texte("salon.accroche", SALON.accroche)}
       />
 
       <div className="mt-14 grid gap-4 sm:gap-5 lg:grid-cols-3">
@@ -62,7 +74,7 @@ export function Salon({ onDevenirModele }: { onDevenirModele: () => void }) {
             ))}
           </div>
           <p className="mt-4 text-[12.5px] leading-5 text-muted-foreground">
-            {SALON.tarifsNote}
+            {texte("salon.tarifsNote", SALON.tarifsNote)}
           </p>
 
           <p className="eyebrow mt-14">Conditions d'accueil</p>
@@ -84,13 +96,13 @@ export function Salon({ onDevenirModele }: { onDevenirModele: () => void }) {
             <div className="border-l-2 border-bronze bg-bronze-tint/70 px-7 py-6">
               <p className="eyebrow-accent">Touche d'essai</p>
               <p className="mt-3 text-[14px] leading-7 text-ink-soft">
-                {SALON.toucheEssai}
+                {texte("salon.toucheEssai", SALON.toucheEssai)}
               </p>
             </div>
           </Reveal>
 
           <div className="mt-9 border-t border-ink/15">
-            {RENDEZ_VOUS.map((ligne) => (
+            {rendezVous.map((ligne) => (
               <div
                 key={ligne.label}
                 className="flex items-baseline justify-between gap-6 border-b border-border py-3.5"

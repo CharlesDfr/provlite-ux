@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useTexte } from "@/hooks/use-contenus";
 import { SITE } from "@/lib/provelite";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, Menu, X } from "lucide-react";
@@ -38,6 +39,7 @@ function Wordmark({ onClick }: { onClick?: () => void }) {
  */
 function CampaignBar() {
   const [visible, setVisible] = useState(true);
+  const texte = useTexte();
   const bandeau = SITE.bandeauCampagne;
 
   if (!visible || !bandeau.actif) return null;
@@ -52,13 +54,15 @@ function CampaignBar() {
   return (
     <div className="bg-ink text-white">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-2.5 sm:px-8">
-        <p className="text-[12.5px] leading-5 text-white/80">{bandeau.texte}</p>
+        <p className="text-[12.5px] leading-5 text-white/80">
+          {texte("bandeau.texte", bandeau.texte)}
+        </p>
         <div className="flex shrink-0 items-center gap-4">
           <a
             href="#moments"
             className="hidden text-[12.5px] font-medium text-bronze underline decoration-bronze/40 underline-offset-4 transition-colors hover:decoration-bronze sm:inline"
           >
-            {bandeau.bouton}
+            {texte("bandeau.bouton", bandeau.bouton)}
           </a>
           <button
             type="button"
@@ -75,6 +79,7 @@ function CampaignBar() {
 }
 
 export function SiteHeader() {
+  const texte = useTexte();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -166,9 +171,9 @@ export function SiteHeader() {
             Mon parcours
           </Link>
           <p className="mt-8 mb-8 text-[13px] leading-6 text-muted-foreground">
-            {SITE.contact.adresse}
+            {texte("contact.adresse", SITE.contact.adresse)}
             <br />
-            {SITE.contact.telephone}
+            {texte("contact.telephone", SITE.contact.telephone)}
           </p>
         </nav>
       </div>

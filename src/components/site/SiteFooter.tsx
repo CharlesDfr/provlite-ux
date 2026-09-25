@@ -1,3 +1,4 @@
+import { useTexte } from "@/hooks/use-contenus";
 import { ARBORESCENCE, SITE } from "@/lib/provelite";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router";
@@ -18,28 +19,30 @@ const SUR_CETTE_PAGE = [
   { label: "Conseils & actualités", to: "#conseils" },
 ];
 
-const CONTACTS = [
-  {
-    titre: "Accueil du CFA",
-    lignes: [
-      SITE.contact.adresse,
-      SITE.contact.telephone,
-      SITE.contact.email,
-      SITE.contact.horaires,
-    ],
-  },
-  {
-    titre: "Salon d'application",
-    lignes: [
-      SITE.salon.adresse,
-      SITE.salon.telephone,
-      SITE.salon.horairesAppel,
-      SITE.salon.periode,
-    ],
-  },
-];
-
 export function SiteFooter() {
+  const texte = useTexte();
+
+  const contacts = [
+    {
+      titre: "Accueil du CFA",
+      lignes: [
+        texte("contact.adresse", SITE.contact.adresse),
+        texte("contact.telephone", SITE.contact.telephone),
+        texte("contact.email", SITE.contact.email),
+        texte("contact.horaires", SITE.contact.horaires),
+      ],
+    },
+    {
+      titre: "Salon d'application",
+      lignes: [
+        texte("salon.coordonnees.adresse", SITE.salon.adresse),
+        texte("salon.coordonnees.telephone", SITE.salon.telephone),
+        texte("salon.coordonnees.horairesAppel", SITE.salon.horairesAppel),
+        texte("salon.periode", SITE.salon.periode),
+      ],
+    },
+  ];
+
   return (
     <footer id="contact" className="border-t border-border bg-secondary">
       <div className="mx-auto w-full max-w-6xl px-6 py-20 sm:px-8">
@@ -50,8 +53,8 @@ export function SiteFooter() {
               <span className="eyebrow-accent">Académie</span>
             </a>
             <p className="mt-5 max-w-xs text-[13px] leading-6 text-ink-soft">
-              {SITE.baseline} CFA de la coiffure depuis 2008, en alternance et
-              en formation continue.
+              {texte("site.baseline", SITE.baseline)} CFA de la coiffure depuis
+              2008, en alternance et en formation continue.
             </p>
             <Link
               to="/dashboard"
@@ -108,7 +111,7 @@ export function SiteFooter() {
           <div className="lg:col-span-3">
             <p className="eyebrow">Contacts</p>
             <div className="mt-5 space-y-7">
-              {CONTACTS.map((bloc) => (
+              {contacts.map((bloc) => (
                 <div key={bloc.titre}>
                   <p className="text-[13px] font-medium text-ink">
                     {bloc.titre}
@@ -135,7 +138,7 @@ export function SiteFooter() {
           </p>
           <p className="text-[12px] text-muted-foreground">
             Accessibilité : accueil et aménagements étudiés au cas par cas —{" "}
-            {SITE.contact.email}
+            {texte("contact.email", SITE.contact.email)}
           </p>
         </div>
       </div>

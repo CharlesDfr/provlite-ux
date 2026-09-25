@@ -59,6 +59,17 @@ const schema = defineSchema(
       updatedBy: v.optional(v.id("users")),
     }).index("by_cle", ["cle"]),
 
+    // Textes du site, remplaçables depuis le CMS.
+    // Comme pour les visuels, la table ne contient que les surcharges : sans
+    // enregistrement, le texte par défaut du site s'affiche. Une ligne par
+    // emplacement de texte remplacé.
+    contenus: defineTable({
+      cle: v.string(),
+      valeur: v.string(),
+      updatedAt: v.number(),
+      updatedBy: v.optional(v.id("users")),
+    }).index("by_cle", ["cle"]),
+
     // tableName: defineTable({
     //   ...
     //   // table fields

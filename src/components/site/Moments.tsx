@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useTexte } from "@/hooks/use-contenus";
 import { MOMENTS, SESSIONS, SITE } from "@/lib/provelite";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
@@ -10,14 +11,29 @@ import { Reveal, Section, SectionHead } from "./Section";
  * disparaît du site (menu, accueil et accès direct) hors campagne.
  */
 export function Moments() {
+  const texte = useTexte();
+
+  // Les coordonnées pratiques suivent les mêmes textes que le reste du site.
+  const infos = MOMENTS.infos.map((info) => {
+    if (info.label === "Adresse") {
+      return { ...info, value: texte("contact.adresse", SITE.contact.adresse) };
+    }
+    if (info.label === "Contact") {
+      const telephone = texte("contact.telephone", SITE.contact.telephone);
+      const email = texte("contact.email", SITE.contact.email);
+      return { ...info, value: `${telephone} — ${email}` };
+    }
+    return info;
+  });
+
   if (!SITE.momentsDecouverteActif) return null;
 
   return (
     <Section id="moments" tone="muted">
       <SectionHead
-        eyebrow={MOMENTS.eyebrow}
-        title={MOMENTS.titre}
-        lede={MOMENTS.lede}
+        eyebrow={texte("moments.eyebrow", MOMENTS.eyebrow)}
+        title={texte("moments.titre", MOMENTS.titre)}
+        lede={texte("moments.lede", MOMENTS.lede)}
       />
 
       <Photo
@@ -86,7 +102,7 @@ export function Moments() {
         <aside className="lg:col-span-5">
           <p className="eyebrow">Informations pratiques</p>
           <div className="mt-5 border-t border-ink/15">
-            {MOMENTS.infos.map((info) => (
+            {infos.map((info) => (
               <div
                 key={info.label}
                 className="flex items-baseline justify-between gap-6 border-b border-border py-3.5"

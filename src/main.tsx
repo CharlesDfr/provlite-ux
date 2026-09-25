@@ -13,6 +13,7 @@ const Landing = lazy(() => import("./pages/Landing.tsx"));
 const AuthPage = lazy(() => import("./pages/Auth.tsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.tsx"));
 const Visuels = lazy(() => import("./pages/Visuels.tsx"));
+const Contenus = lazy(() => import("./pages/Contenus.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
 // Simple loading fallback for route transitions
@@ -143,6 +144,17 @@ createRoot(document.getElementById("root")!).render(
                     description="Le remplacement des photographies du site est réservé à l'équipe de l'établissement."
                   >
                     <Visuels />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="/admin/contenus"
+                element={
+                  <RequireAuth
+                    title="Connectez-vous pour gérer les textes"
+                    description="La modification des textes du site est réservée à l'équipe de l'établissement."
+                  >
+                    <Contenus />
                   </RequireAuth>
                 }
               />

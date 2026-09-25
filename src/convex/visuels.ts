@@ -1,7 +1,6 @@
-import { getAuthUserId } from "@convex-dev/auth/server";
 import { v } from "convex/values";
-import { mutation, query, type MutationCtx } from "./_generated/server";
-import { ROLES } from "./schema";
+import { exigerAdmin } from "./admin";
+import { mutation, query } from "./_generated/server";
 
 /**
  * Photographies du site, remplaçables depuis le CMS.
@@ -28,21 +27,6 @@ export const tousLesVisuels = query({
     );
   },
 });
-
-/** Vérifie que l'auteur de la demande est administrateur. */
-async function exigerAdmin(ctx: MutationCtx) {
-  const userId = await getAuthUserId(ctx);
-  if (userId === null) {
-    throw new Error("Connexion requise pour modifier les visuels du site.");
-  }
-  const user = await ctx.db.get(userId);
-  if (user?.role !== ROLES.ADMIN) {
-    throw new Error(
-      "Seul un administrateur peut modifier les photographies du site.",
-    );
-  }
-  return userId;
-}
 
 /** Adresse de téléversement, valable une fois, pour importer une photographie. */
 export const genererUrlUpload = mutation({
